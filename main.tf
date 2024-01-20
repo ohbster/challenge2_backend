@@ -6,6 +6,9 @@ terraform {
     }
   }
 }
+provider "aws" {
+  region = "us-east-1"
+}
 
 #This is used by mff_id tag. This is will identify all resources that belong to the terraform deployment
 resource "random_uuid" "uuid" {
