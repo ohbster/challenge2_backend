@@ -27,6 +27,7 @@ locals {
 
 # }
 resource "aws_s3_bucket" "bucket" {
+  force_destroy = true
   bucket = "ohbster-project2"
 }
 
