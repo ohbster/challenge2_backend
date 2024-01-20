@@ -14,6 +14,7 @@ steps:
 - task: TerraformInstaller@1
   inputs:
     terraformVersion: 'latest'
+  displayName: 'Install terraform'
 - task: TerraformTaskV4@4
   inputs:
     provider: 'aws'
@@ -21,6 +22,7 @@ steps:
     backendServiceAWS: '(Project 2) AWS for Terraform'
     backendAWSBucketName: 'ohbster-project2-ado-terraform'
     backendAWSKey: 'dev/terraform.tfstate'
+  displayName: 'Initialize terraform'
 
 - task: TerraformTaskV4@4
   inputs:
