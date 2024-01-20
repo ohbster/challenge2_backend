@@ -28,7 +28,7 @@ locals {
 # }
 resource "aws_s3_bucket" "bucket" {
   force_destroy = true
-  bucket = "ohbster-project2"
+  #bucket = "ohbster-project2"
 }
 
 resource "aws_s3_bucket_public_access_block" "s3_public_block" {
