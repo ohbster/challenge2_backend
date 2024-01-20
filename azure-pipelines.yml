@@ -30,7 +30,7 @@ steps:
     command: 'apply'
     commandOptions: '--auto-approve'
     environmentServiceNameAWS: '(Project 2) AWS for Terraform'
-
+  displayName: 'Apply terraform'
 # - script: echo Hello, world!
 #   displayName: 'Run a one-line script'
 
