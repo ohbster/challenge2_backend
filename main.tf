@@ -11,7 +11,7 @@ provider "aws" {
 }
 terraform {
   backend "s3" {
-    bucket = "ohbster-project2"
+    bucket = "ohbster-ado-terraform-class5"
     key    = "dev/terraform.tfstate"
     region = "us-east-1"
   }
@@ -36,7 +36,7 @@ locals {
 # }
 resource "aws_s3_bucket" "bucket" {
   force_destroy = true
-  bucket = "ohbster-project2"
+  bucket = "ohbster-project-2"
 }
 
 resource "aws_s3_bucket_public_access_block" "s3_public_block" {
@@ -57,6 +57,7 @@ resource "aws_s3_bucket_website_configuration" "website_configuration" {
 }
 
 resource "aws_s3_bucket_policy" "policy" {
+  
   bucket = aws_s3_bucket.bucket.id
   policy = jsonencode({
     "Version": "2012-10-17",
