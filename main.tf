@@ -9,6 +9,14 @@ terraform {
 provider "aws" {
   region = "us-east-1"
 }
+terraform {
+  backend "s3" {
+    bucket = "ohbster-project2"
+    key    = "dev/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
 
 #This is used by mff_id tag. This is will identify all resources that belong to the terraform deployment
 resource "random_uuid" "uuid" {
@@ -28,7 +36,7 @@ locals {
 # }
 resource "aws_s3_bucket" "bucket" {
   force_destroy = true
-  #bucket = "ohbster-project2"
+  bucket = "ohbster-project2"
 }
 
 resource "aws_s3_bucket_public_access_block" "s3_public_block" {

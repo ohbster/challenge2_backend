@@ -21,7 +21,7 @@ steps:
     command: 'init'
     backendServiceAWS: '(Project 2) AWS for Terraform'
     backendAWSBucketName: 'ohbster-project2-ado-terraform'
-    backendAWSKey: 'terraform.tfstate'
+    backendAWSKey: 'dev/terraform.tfstate'
   displayName: 'Initialize terraform'
 
 - task: TerraformTaskV4@4
