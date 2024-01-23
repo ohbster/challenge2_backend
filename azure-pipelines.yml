@@ -10,14 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 stages:
-- stage:
-  displayName: SAST
-  jobs:
-  - job: SecurityScan    
-    steps:
-    - task: tfsec@1
-      inputs:
-        version: 'v1.26.0'
+
 - stage:
   displayName: Initialize Terraform
   jobs:
@@ -35,7 +28,19 @@ stages:
         backendAWSBucketName: 'ohbster-project2-ado-terraform'
         backendAWSKey: 'dev/terraform.tfstate'
       displayName: 'Initialize terraform'
-
+- stage:
+  displayName: SAST
+  jobs:
+  - job: SecurityScan    
+    steps:
+    - task: tfsec@1
+      inputs:
+        version: 'v1.26.0'
+- stage:
+  displayName: ApplyTerraform
+  jobs:
+    - job: ApplyTerraform
+    steps:
     - task: TerraformTaskV4@4
       inputs:
         provider: 'aws'
