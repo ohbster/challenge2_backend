@@ -28,8 +28,8 @@ stages:
         backendAWSBucketName: 'ohbster-project2-ado-terraform'
         backendAWSKey: 'dev/terraform.tfstate'
       displayName: 'Initialize terraform'
-  - job: ApplyTerraform
-    steps:
+  # - job: ApplyTerraform
+  #   steps:
     - task: TerraformTaskV4@4
       inputs:
         provider: 'aws'
