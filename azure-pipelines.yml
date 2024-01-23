@@ -28,15 +28,15 @@ stages:
         backendAWSBucketName: 'ohbster-project2-ado-terraform'
         backendAWSKey: 'dev/terraform.tfstate'
       displayName: 'Initialize terraform'
-- stage:
-  displayName: SAST
-  jobs:
-  - job: SecurityScan    
-    steps:
-    - task: tfsec@1
-      inputs:
-        version: 'v1.26.0'
-        debug: true
+# - stage:
+#   displayName: SAST
+#   jobs:
+#   - job: SecurityScan    
+#     steps:
+#     - task: tfsec@1
+#       inputs:
+#         version: 'v1.26.0'
+#         debug: true
 - stage:
   displayName: ApplyTerraform
   jobs:
