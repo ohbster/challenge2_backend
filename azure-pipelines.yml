@@ -28,8 +28,6 @@ stages:
         backendAWSBucketName: 'ohbster-project2-ado-terraform'
         backendAWSKey: 'dev/terraform.tfstate'
       displayName: 'Initialize terraform'
-  # - job: ApplyTerraform
-  #   steps:
     - task: TerraformTaskV4@4
       inputs:
         provider: 'aws'
@@ -46,23 +44,3 @@ stages:
 #       inputs:
 #         version: 'v1.26.0'
 #         debug: true
-
-# - stage:
-#   displayName: ApplyTerraform
-#   jobs:
-#   - job: ApplyTerraform
-#     steps:
-#     - task: TerraformTaskV4@4
-#       inputs:
-#         provider: 'aws'
-#         command: 'apply'
-#         commandOptions: '--auto-approve'
-#         environmentServiceNameAWS: '(Project 2) AWS for Terraform'
-#       displayName: 'Apply terraform'
-    # - script: echo Hello, world!
-    #   displayName: 'Run a one-line script'
-
-    # - script: |
-    #     echo Add other tasks to build, test, and deploy your project.
-    #     echo See https://aka.ms/yaml
-    #   displayName: 'Run a multi-line script'
