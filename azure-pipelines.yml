@@ -9,32 +9,44 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
+stages:
+- stage:
+  displayName: SAST
+  jobs:
+  - job: SecurityScan    
+    steps:
+    - task: tfsec@1
+      inputs:
+        version: 'v1.26.0'
+- stage:
+  displayName: Initialize Terraform
+  jobs:
+  - job: InstallTerraform
+    steps:
+    - task: TerraformInstaller@1
+      inputs:
+        terraformVersion: 'latest'
+      displayName: 'Install terraform'
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'aws'
+        command: 'init'
+        backendServiceAWS: '(Project 2) AWS for Terraform'
+        backendAWSBucketName: 'ohbster-project2-ado-terraform'
+        backendAWSKey: 'dev/terraform.tfstate'
+      displayName: 'Initialize terraform'
 
-- task: TerraformInstaller@1
-  inputs:
-    terraformVersion: 'latest'
-  displayName: 'Install terraform'
-- task: TerraformTaskV4@4
-  inputs:
-    provider: 'aws'
-    command: 'init'
-    backendServiceAWS: '(Project 2) AWS for Terraform'
-    backendAWSBucketName: 'ohbster-project2-ado-terraform'
-    backendAWSKey: 'dev/terraform.tfstate'
-  displayName: 'Initialize terraform'
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'aws'
+        command: 'apply'
+        commandOptions: '--auto-approve'
+        environmentServiceNameAWS: '(Project 2) AWS for Terraform'
+      displayName: 'Apply terraform'
+    # - script: echo Hello, world!
+    #   displayName: 'Run a one-line script'
 
-- task: TerraformTaskV4@4
-  inputs:
-    provider: 'aws'
-    command: 'apply'
-    commandOptions: '--auto-approve'
-    environmentServiceNameAWS: '(Project 2) AWS for Terraform'
-  displayName: 'Apply terraform'
-# - script: echo Hello, world!
-#   displayName: 'Run a one-line script'
-
-# - script: |
-#     echo Add other tasks to build, test, and deploy your project.
-#     echo See https://aka.ms/yaml
-#   displayName: 'Run a multi-line script'
+    # - script: |
+    #     echo Add other tasks to build, test, and deploy your project.
+    #     echo See https://aka.ms/yaml
+    #   displayName: 'Run a multi-line script'
