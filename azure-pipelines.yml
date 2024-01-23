@@ -39,7 +39,7 @@ stages:
 - stage:
   displayName: ApplyTerraform
   jobs:
-    - job: ApplyTerraform
+  - job: ApplyTerraform
     steps:
     - task: TerraformTaskV4@4
       inputs:
