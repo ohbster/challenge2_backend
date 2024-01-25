@@ -12,25 +12,14 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket = "ohbster-ado-terraform-class5"
-    key    = "dev/terraform.tfstate"
+    key    = "demo/terraform.tfstate"
     region = "us-east-1"
   }
 }
 
-
-#This is used by mff_id tag. This is will identify all resources that belong to the terraform deployment
-resource "random_uuid" "uuid" {
-
-}
-
-#This will add the mff_id uuid to the common tags that get passed to resources. This will identify resources that belong to this deployment
-locals {
-  common_tags = merge(var.common_tags, { mff_id = random_uuid.uuid.result })
-}
-
 resource "aws_s3_bucket" "bucket" {
   force_destroy = true
-  bucket = "ohbster-project-2"
+  bucket = "ohbster-ado-demo"
 }
 
 resource "aws_s3_bucket_public_access_block" "s3_public_block" {
