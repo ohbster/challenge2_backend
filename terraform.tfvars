@@ -4,7 +4,7 @@
 #Project Attributes
 ########
 #The name to use for the resources
-name = "ohbster-project-2"
+bucket_name = "ohbster-project-2"
 #Set the region for the project
 regions = [{
   region = "us-east-1"

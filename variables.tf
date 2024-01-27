@@ -1,12 +1,12 @@
 ########
 #Project variables
 ########
-variable "name" {
+variable "bucket_name" {
   type        = string
   description = "Main project name"
 
   validation {
-    condition     = can(regex("^[a-zA-Z][a-zA-Z0-9-]{3,20}", var.name))
+    condition     = can(regex("^[a-zA-Z][a-zA-Z0-9-]{3,20}", var.bucket_name))
     error_message = "Invalid name: Start with letter, only letters, numbers and '-'"
   }
 }

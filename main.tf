@@ -30,7 +30,8 @@ locals {
 
 resource "aws_s3_bucket" "bucket" {
   force_destroy = true
-  bucket = "ohbster-project-2"
+  bucket = var.bucket_name
+  tags = var.common_tags
 }
 
 resource "aws_s3_bucket_public_access_block" "s3_public_block" {
@@ -38,8 +39,10 @@ resource "aws_s3_bucket_public_access_block" "s3_public_block" {
 
   block_public_acls       = false
   block_public_policy     = false
-  # ignore_public_acls      = false
-  # restrict_public_buckets = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
+
+  depends_on = [ aws_s3_bucket.bucket ]
 }
 
 
@@ -48,6 +51,8 @@ resource "aws_s3_bucket_website_configuration" "website_configuration" {
   index_document {
     suffix = "index.html"
   }
+
+  depends_on = [ aws_s3_bucket.bucket ]
 }
 
 resource "aws_s3_bucket_policy" "policy" {
@@ -65,4 +70,5 @@ resource "aws_s3_bucket_policy" "policy" {
         }
     ]
 })
+depends_on = [ aws_s3_bucket.bucket ]
 }
